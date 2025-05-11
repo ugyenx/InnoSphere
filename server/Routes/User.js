@@ -1,9 +1,9 @@
 import express from "express";
-import { userModel, ContentModel, CourseModel } from "../db.js";
+import { UserModel } from "../db.js";
 import { userValidator, userSigninValidator } from "../validator.js";
 import { z } from "zod";
 import jwt from "jsonwebtoken";
-import { jwt_user, salt_rounds } from "../config.js";
+
 import bcrypt from "bcrypt";
 
 export const userRoutes = express.Router();
@@ -11,18 +11,13 @@ export const userRoutes = express.Router();
 userRoutes.post("/signup", async function (req, res) {
   const userData = req.body;
   console.log(userData);
-  const verifiedData = userValidator.safeParse(userData);
-  if (!verifiedData.success) {
-    return res.status(400).json({
-      msg: verifiedData.error.issues,
-    });
-  }
+  
   try {
-    const userAlreadyExists = await userModel.findOne({
+    const userAlreadyExists = await UserModel.findOne({
       email: userData.email,
     });
     if (userAlreadyExists) {
-      if (userAlreadyExists.userame == userData.userame) {
+      if (userAlreadyExists.username == userData.username) {
         return res.status(409).json({
           msg: "user already exists. Please login or use different username.",
         });
@@ -35,11 +30,11 @@ userRoutes.post("/signup", async function (req, res) {
     let salt = await bcrypt.genSalt(5);
     let hashedPassword = await bcrypt.hash(userData.password, salt);
 
-    const createNewUser = await userModel.create({
-      userame: userData.userame,
+    const createNewUser = await UserModel.create({
+      username: userData.name,
       password: hashedPassword,
       email: userData.email,
-      profile: userData.profile,
+      
     });
 
     res.status(200).json({
@@ -54,14 +49,9 @@ userRoutes.post("/signup", async function (req, res) {
 });
 userRoutes.post("/signin", async function (req, res) {
   const userData = req.body;
-  const verifiedData = userSigninValidator.safeParse(userData);
-  if (!verifiedData.success) {
-    return res.status(400).json({
-      msg: verifiedData.error,
-    });
-  }
+  console.log(userData)
   try {
-    const userExists = await userModel.findOne({
+    const userExists = await UserModel.findOne({
       email: userData.email,
     });
     if (!userExists) {
@@ -75,7 +65,7 @@ userRoutes.post("/signin", async function (req, res) {
         {
           id: userExists._id.toString(),
         },
-        jwt_user,
+        "user",
         {
           expiresIn: "12h",
         }

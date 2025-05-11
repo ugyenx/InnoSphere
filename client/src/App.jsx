@@ -21,6 +21,10 @@ import "aos/dist/aos.css";
 import LoginForm from "./components/Login/Login.jsx";
 import Home from "./pages/Home.jsx";
 import Cart from "./components/Cart/Cart.jsx";
+import Signup from "./components/Login/Signup.jsx";
+import Login from "./components/Login/Login.jsx";
+import AdminDashboard from "./pages/Dasboard.jsx";
+
 
 const BannerData = {
   discount: "30% OFF",
@@ -65,7 +69,11 @@ const App = () => {
 
   return (
     <BrowserRouter>
-    <Routes><Route path="/register" element={<LoginForm />}/><Route path="/" element={<Home/>}/><Route path="/cart" element={<Cart/>}/></Routes>
+    <Routes><Route path="/login" element={<Login />} />
+    <Route path="/signup" element={<Signup />} />
+    <Route path="/admin" element={<AdminDashboard />} />
+    <Route path="/" element={<Home/>}/>
+    <Route path="/cart" element={<Cart/>}/></Routes>
    </BrowserRouter>
   );
 };

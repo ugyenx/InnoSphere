@@ -4,19 +4,12 @@ const Schema = mongoose.Schema;
 
 const ItemSchema = new Schema({
   image: String,
-  title: String,
+  name: String,
   price: Number,
-  rates: Number,
-  stars: Number,
-  discount: Number,
-  quantity: Number,
-  type: String,
-  details: String,
+ 
 });
 const User = new Schema({
-  profile: {
-    type: String,
-  },
+
   username: {
     type: String,
     required: true,

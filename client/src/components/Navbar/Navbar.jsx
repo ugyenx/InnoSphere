@@ -93,7 +93,7 @@ const Navbar = ({ handleOrderPopup }) => {
               <DarkMode />
             </div>
             {/* profile section */}
-            <div className="hidden lg:block" onClick={()=>naviagte("/register")}>
+            <div className="hidden lg:block" onClick={()=>naviagte("/login")}>
               <FaUser className="w-5 h-5 rounded-full object-cover"/>
             </div>
           </div>
