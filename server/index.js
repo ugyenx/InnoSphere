@@ -8,7 +8,7 @@ import cookieParser from "cookie-parser";
 const app = express();
 
 mongoose.connect(
-  "mongodb+srv://upadhyagovinda01:K0egzI9gHC3Zh3Vw@cluster0.s0p1pnn.mongodb.net/"
+  ""
 );
 app.use(express.json());
 
