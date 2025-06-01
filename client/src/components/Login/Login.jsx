@@ -4,15 +4,24 @@ import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 
 function Login() {
-  const { register, handleSubmit, formState: { errors } } = useForm();
-  const navigate=useNavigate()
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
+  const navigate = useNavigate();
   // Submit handler
   const onSubmit = async (data) => {
     try {
-      const response = await axios.post("http://localhost:3000/user/signin", data);
+      const response = await axios.post(
+        "http://localhost:3000/user/signin",
+        data,
+        {
+          withCredentials: true,
+        }
+      );
 
-      
-      navigate("/")
+      navigate("/");
       // You can store token or redirect here
     } catch (error) {
       console.error("Login error:", error);

@@ -8,7 +8,6 @@ import Banner from "./components/Banner/Banner";
 import Partners from "./components/Partners/Partners.jsx";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
-
 import headphone from "./assets/hero/headphone.png";
 import smartwatch2 from "./assets/category/smartwatch2-removebg-preview.png";
 
@@ -24,7 +23,8 @@ import Cart from "./components/Cart/Cart.jsx";
 import Signup from "./components/Login/Signup.jsx";
 import Login from "./components/Login/Login.jsx";
 import AdminDashboard from "./pages/Dasboard.jsx";
-
+import AdminLogin from "./components/admin/AdminLogin.jsx";
+import IndividualOrder from "./components/IndividualOrder/IndividualOrder.jsx";
 
 const BannerData = {
   discount: "30% OFF",
@@ -69,12 +69,16 @@ const App = () => {
 
   return (
     <BrowserRouter>
-    <Routes><Route path="/login" element={<Login />} />
-    <Route path="/signup" element={<Signup />} />
-    <Route path="/admin" element={<AdminDashboard />} />
-    <Route path="/" element={<Home/>}/>
-    <Route path="/cart" element={<Cart/>}/></Routes>
-   </BrowserRouter>
+      <Routes>
+        <Route path="/login" element={<Login />} />
+        <Route path="/signup" element={<Signup />} />
+        <Route path="/admin/login" element={<AdminLogin />} />
+        <Route path="/admin/dashboard" element={<AdminDashboard />} />
+        <Route path="/viewOrders" element={<IndividualOrder />} />
+        <Route path="/" element={<Home />} />
+        <Route path="/cart" element={<Cart />} />
+      </Routes>
+    </BrowserRouter>
   );
 };
 
